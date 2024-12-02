@@ -12,7 +12,6 @@ void TextureConverter::LoadWICTextureFromFile(const std::string& filePath) {
 
 	//ファイルパスをワイド文字列に変換
 	std::wstring wFilePath = ConvertMultiByteStringToWideString(filePath);
-
 }
 
 std::wstring TextureConverter::ConvertMultiByteStringToWideString(const std::string& mString) {

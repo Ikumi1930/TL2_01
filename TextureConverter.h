@@ -9,14 +9,20 @@ public:
 		///テクスチャをWICからDDSに変換する
 		///</summary>
 		///<param name="filePath">ファイルパス</param>
+		/// WICをDDSに変換する関数
 		void ConvertTextureWICToDDS(const std::string & filePath);
 
 private:
-
-		//テクスチャファイル読み込み
+		///<summary>
+		///テクスチャファイルの読み込み
+		///</summary>
+		///<param name="filePath">ファイルパス</param>
 		void LoadWICTextureFromFile(const std::string& filePath);
 
-		//マルチバイト文字列をワイド文字列に変換
+		///<summary>
+		///マルチバイト文字をワイド文字に変換する
+		///</summary>
+		///<param name="filePath">マルチバイト文字列</param>
 		static std::wstring ConvertMultiByteStringToWideString(const std::string& mString);
 
 };

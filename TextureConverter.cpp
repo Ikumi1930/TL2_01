@@ -1,7 +1,7 @@
 #include "TextureConverter.h"
 #include <Windows.h>
 
-using namespace DirectX;
+using namespace DirectX;//cpp内なら使ってもいい
 
 void TextureConverter::ConvertTextureWICToDDS(const std::string& filePath) {
 
@@ -53,7 +53,7 @@ void TextureConverter::SeparateFilePath(const std::wstring& filePath) {
 			//区切り文字の後ろをファイル拡張子として保存
 			fileExt_ = filePath.substr(pos1 + 1, filePath.size() - pos1 - 1);
 			//区切り文字の前までを抜き出す
-			exceptExt = filePath.substr(0, pos1);
+			exceptExt = filePath.substr(0, pos1);//.pngより前の文字が入る
 		}
 		else {
 			fileExt_ = L"";
@@ -61,16 +61,17 @@ void TextureConverter::SeparateFilePath(const std::wstring& filePath) {
 		}
 
 		//区切り文字'\\'が出てくる一番最後の部分を検索
-		pos1 = exceptExt.rfind('\\');
+		pos1 = exceptExt.rfind('\\');// バックスラッシュ二つで一つ扱い
 		//検索がヒットしたら
 		if (pos1 != std::wstring::npos) {
 			//区切り文字の前までをディレクトリパスとして保存
 			directoryPath_ = exceptExt.substr(0, pos1 + 1);
 			//区切り文字の後ろをファイル名として保存
-			fileName_ = exceptExt.substr(pos1 + 1, exceptExt.size() - pos1 - 1);
+			fileName_ = exceptExt.substr(pos1 + 1, exceptExt.size() - pos1 - 1);//-1で\0をの分を消す
 			return;
 		}
-	
+		
+		//スラッシュで区切る人もいる
 		//区切り文字'/'が出てくる一番最後の部分を検索
 		pos1 = exceptExt.rfind('/');
 		//検索がヒットしたら
@@ -82,7 +83,7 @@ void TextureConverter::SeparateFilePath(const std::wstring& filePath) {
 			return;
 		}
 
-		//区切り文字ガないのでファイル名のみとして扱う
+		//区切り文字がないのでファイル名のみとして扱う
 		directoryPath_ = L"";
 		fileName_ = exceptExt;
 
